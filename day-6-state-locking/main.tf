@@ -4,3 +4,10 @@ resource "aws_vpc" "name" {
     Name = "dev2-vpc"
   }
 }
+resource "aws_subnet" "name" {
+  vpc_id     = aws_vpc.name.id
+  cidr_block = "10.0.0.0/26"
+    tags = {
+        Name = "dev2-subnet"
+    }
+}
