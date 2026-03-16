@@ -72,7 +72,7 @@ resource "aws_route" "public_rt_internet" {
     gateway_id = aws_internet_gateway.igw.id
 }
 #Associating the public subnets with the public Route Table using Terraform
-resource "aws_route_table_association" "public_subnet-association" {
+resource "aws_route_table_association" "public_subnet_association" {
     subnet_id = aws_subnet.public_subnet_1.id
     route_table_id = aws_route_table.public_rt.id
 }
@@ -92,11 +92,11 @@ resource "aws_route" "private_rt_nat" {
   nat_gateway_id = aws_nat_gateway.nat_gw.id
 }
 #Associating both the private subnets with the private Route Table using Terraform
-resource "aws_route_table_association" "private_subnet_1-association" {
+resource "aws_route_table_association" "private_subnet_1_association" {
   subnet_id = aws_subnet.private_subnet_1.id
   route_table_id = aws_route_table.private_rt.id
 }
-resource "aws_route_table_association" "private_subnet_2-association" {
+resource "aws_route_table_association" "private_subnet_2_association" {
   subnet_id = aws_subnet.private_subnet_2.id
   route_table_id = aws_route_table.private_rt.id
 }
@@ -130,6 +130,7 @@ resource "aws_instance" "bastion_ec2" {
     instance_type = "t2.micro"
     subnet_id = aws_subnet.public_subnet_1.id
     availability_zone = "us-east-1a"
+    associate_public_ip_address = true
     security_groups = [aws_security_group.bastion_sg.id]
   tags = {
     Name = "bastion-ec2"
@@ -169,6 +170,7 @@ resource "aws_instance" "app_ec2" {
     instance_type = "t2.micro"
     subnet_id = aws_subnet.private_subnet_1.id
     availability_zone = "us-east-1a"
+    associate_public_ip_address = false
     security_groups = [aws_security_group.private_sg.id]
   tags = {
     Name = "app-ec2"
