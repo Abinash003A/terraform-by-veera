@@ -14,9 +14,9 @@ variable "subnet_cidr_block" {
 variable "tags" {
   description = "Tags for the resources"
   type = object({
-    vpc_tags     = string
-    subnet1_tags = string
-    subnet2_tags = string
+    vpc_tags     = map(string)
+    subnet1_tags = map(string)
+    subnet2_tags = map(string)
   })
 }
 
