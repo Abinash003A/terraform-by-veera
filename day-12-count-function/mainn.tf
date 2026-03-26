@@ -1,8 +1,7 @@
 variable "dev" {
     type = bool
-    default = true
+    default = true 
 }
-
 
 resource "aws_instance" "name" {
     ami           = "ami-02dfbd4ff395f2a1b"
@@ -11,6 +10,7 @@ resource "aws_instance" "name" {
     #if dev is true then create 1 instance if false then create 0 instance
     
 }
+
 
 #if value = false shows no resource to create i.e = 0
 #if value = true shows resource to create i.e = 1
